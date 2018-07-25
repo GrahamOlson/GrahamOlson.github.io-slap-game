@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+    <title>Thumb War</title>
+</head>
+
+<body>
+    <header>
+        <div class="row">
+            <div class="col-4">
+                <p>Choose your weapon</p>
+                <button onClick="giveItem('shield')" class="btn btn-secondary">Shield</button>
+                <button onClick="giveItem('sword')" class="btn btn-secondary">Sword</button>
+                <button onClick="giveItem('special')" class="btn btn-secondary">Special</button>
+            </div>
+            <div class="col-4">
+                <h3 id="name"></h3>
+                <span>Player Health:
+                    <span id="health"></span>
+                </span>
+                <span>Hits:
+                    <span id="hit"></span>
+                </span>
+            </div>
+            <div class="col-4">
+                <h3 id="nameComputer"></h3>
+                <span>Computer Health:
+                    <span id="healthComputer"></span>
+                </span>
+            </div>
+        </div>
+    </header>
+    <footer>
+
+    </footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <button onClick="playerAttack('slap')" type="button" class="btn btn-primary">Slap</button>
+            </div>
+            <div class="col-3">
+                <button onClick="playerAttack('punch')" type="button" class="btn btn-primary">Thumb Punch</button>
+            </div>
+            <div class="col-3">
+                <button onClick="playerAttack('combo')" type="button" class="btn btn-primary">Combo Move</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <img src="data:image/png;base64,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"
+                alt="">
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
